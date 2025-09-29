@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Mar 16, 2025 at 10:26 AM
--- Server version: 5.7.36
--- PHP Version: 7.4.26
+-- Host: 127.0.0.1
+-- Generation Time: Sep 29, 2025 at 01:12 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,14 +27,12 @@ SET time_zone = "+00:00";
 -- Table structure for table `audittrails`
 --
 
-DROP TABLE IF EXISTS `audittrails`;
-CREATE TABLE IF NOT EXISTS `audittrails` (
-  `id` int(200) NOT NULL AUTO_INCREMENT,
-  `datetime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+CREATE TABLE `audittrails` (
+  `id` int(200) NOT NULL,
+  `datetime` timestamp NOT NULL DEFAULT current_timestamp(),
   `username` varchar(250) NOT NULL,
-  `action` varchar(250) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=724 DEFAULT CHARSET=latin1;
+  `action` varchar(250) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `audittrails`
@@ -261,7 +259,45 @@ INSERT INTO `audittrails` (`id`, `datetime`, `username`, `action`) VALUES
 (586, '2023-11-15 14:56:39', 'admin3', 'Add Product: ArtLine MarkerPen'),
 (587, '2023-11-15 15:15:37', 'admin3', 'Delete Product: hehehhea'),
 (588, '2023-11-15 15:22:24', 'admin3', 'Logout'),
-(589, '2023-11-15 15:22:30', 'admin2', 'Login');
+(589, '2023-11-15 15:22:30', 'admin2', 'Login'),
+(724, '2025-09-21 07:07:21', 'harzixuan', 'Login'),
+(725, '2025-09-21 07:09:33', 'harzixuan', 'Login'),
+(726, '2025-09-21 13:13:55', 'harzixuan', 'Login'),
+(727, '2025-09-21 16:16:37', 'harzixuan', 'Login'),
+(728, '2025-09-21 16:29:41', 'harzixuan', 'Login'),
+(729, '2025-09-22 02:54:32', 'harzixuan', 'Login'),
+(730, '2025-09-22 02:59:31', 'Rihana', 'Login'),
+(731, '2025-09-22 03:00:10', 'Rihana', 'Logout'),
+(732, '2025-09-22 06:41:36', 'Rihana', 'Login'),
+(733, '2025-09-22 06:51:41', 'Rihana', 'Add Product: fgyui'),
+(734, '2025-09-22 06:52:01', 'Rihana', 'Add Product: ertyu'),
+(735, '2025-09-22 06:53:32', 'Rihana', 'Login'),
+(736, '2025-09-22 06:54:14', 'Rihana', 'Login'),
+(737, '2025-09-22 06:55:14', 'Rihana', 'Login'),
+(738, '2025-09-22 06:56:38', 'Rihana', 'Login'),
+(739, '2025-09-22 07:01:13', 'Rihana', 'Login'),
+(740, '2025-09-22 07:07:49', 'Rihana', 'Login'),
+(741, '2025-09-22 07:11:15', 'Rihana', 'Add Product: rtyjk'),
+(742, '2025-09-22 07:12:10', 'Rihana', 'Login'),
+(743, '2025-09-22 07:21:44', 'Rihana', 'Add Product: 567890'),
+(744, '2025-09-22 07:22:39', 'Rihana', 'Login'),
+(745, '2025-09-22 07:23:04', 'Rihana', 'Edit Product: 567890'),
+(746, '2025-09-22 07:23:43', 'Rihana', 'Login'),
+(747, '2025-09-22 07:24:52', 'Rihana', 'Edit Product: 567890'),
+(748, '2025-09-22 07:34:09', 'Rihana', 'Edit Product: 567890'),
+(749, '2025-09-22 07:34:38', 'Rihana', 'Add Product: khngb'),
+(750, '2025-09-26 11:41:21', 'Rihana', 'Login'),
+(751, '2025-09-26 11:42:30', 'Rihana', 'Login'),
+(752, '2025-09-26 11:45:37', 'Rihana', 'Login'),
+(753, '2025-09-26 11:53:38', 'Rihana', 'Login'),
+(754, '2025-09-26 17:16:11', 'Rihana', 'Login'),
+(755, '2025-09-26 17:52:00', 'Rihana', 'Edit Product: khngb'),
+(756, '2025-09-26 17:52:08', 'Rihana', 'Edit Product: khngb'),
+(757, '2025-09-26 17:57:46', 'Rihana', 'Login'),
+(758, '2025-09-26 17:59:57', 'Rihana', 'Edit Product: khngb'),
+(759, '2025-09-26 18:06:23', 'Rihana', 'Edit Product: 567890'),
+(760, '2025-09-26 18:32:27', 'Rihana', 'Logout'),
+(761, '2025-09-28 23:34:13', 'Rihana', 'Login');
 
 -- --------------------------------------------------------
 
@@ -269,13 +305,11 @@ INSERT INTO `audittrails` (`id`, `datetime`, `username`, `action`) VALUES
 -- Table structure for table `category`
 --
 
-DROP TABLE IF EXISTS `category`;
-CREATE TABLE IF NOT EXISTS `category` (
+CREATE TABLE `category` (
   `categoryid` varchar(250) NOT NULL,
   `categoryname` varchar(250) NOT NULL,
-  `categorydescription` varchar(250) NOT NULL,
-  PRIMARY KEY (`categoryid`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `categorydescription` varchar(250) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `category`
@@ -293,20 +327,18 @@ INSERT INTO `category` (`categoryid`, `categoryname`, `categorydescription`) VAL
 -- Table structure for table `companyprofile`
 --
 
-DROP TABLE IF EXISTS `companyprofile`;
-CREATE TABLE IF NOT EXISTS `companyprofile` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `companyprofile` (
+  `id` int(11) NOT NULL,
   `name` varchar(250) NOT NULL,
-  `profilepicture` varchar(1000) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `profilepicture` varchar(1000) DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `companyprofile`
 --
 
 INSERT INTO `companyprofile` (`id`, `name`, `profilepicture`) VALUES
-(1, 'WinG', 'picture/CompanyLogo.png');
+(1, 'EasyStock', 'picture/CompanyLogo.png');
 
 -- --------------------------------------------------------
 
@@ -314,17 +346,15 @@ INSERT INTO `companyprofile` (`id`, `name`, `profilepicture`) VALUES
 -- Table structure for table `deliverorder`
 --
 
-DROP TABLE IF EXISTS `deliverorder`;
-CREATE TABLE IF NOT EXISTS `deliverorder` (
-  `id` int(250) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `deliverorder` (
+  `id` int(250) NOT NULL,
   `productid` varchar(250) NOT NULL,
   `name` varchar(250) NOT NULL,
   `quantity` int(250) NOT NULL,
   `unitprice` int(255) NOT NULL,
   `location` varchar(200) NOT NULL,
-  `addeddate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=53 DEFAULT CHARSET=latin1;
+  `addeddate` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `deliverorder`
@@ -352,8 +382,7 @@ INSERT INTO `deliverorder` (`id`, `productid`, `name`, `quantity`, `unitprice`, 
 -- Table structure for table `inventory`
 --
 
-DROP TABLE IF EXISTS `inventory`;
-CREATE TABLE IF NOT EXISTS `inventory` (
+CREATE TABLE `inventory` (
   `id` varchar(200) NOT NULL,
   `name` varchar(200) NOT NULL,
   `quantity` int(20) NOT NULL,
@@ -363,9 +392,8 @@ CREATE TABLE IF NOT EXISTS `inventory` (
   `category` varchar(200) NOT NULL,
   `status` varchar(200) NOT NULL,
   `image` varchar(200) NOT NULL,
-  `addeddate` timestamp NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `addeddate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `inventory`
@@ -384,7 +412,8 @@ INSERT INTO `inventory` (`id`, `name`, `quantity`, `unitprice`, `variant`, `desc
 ('S04', 'Faber Castle earser', 50, '2.00', '', 'Faber Casttle Dust Free Earser', 'Stationary', 'Active', 'picture/FABER-CASTELL.jpg', '2023-11-15 17:25:33'),
 ('BAG01', 'Bag', 20, '50.00', 'blue', 'cat blur bag', 'Stationary', 'Active', 'picture/cat school bag.jpg', '2023-11-15 23:06:14'),
 ('BAG02', 'Bag', 20, '50.00', 'yellow', 'cat blur bag', 'Stationary', 'Active', 'picture/Emoji school bag.jpg', '2023-11-15 23:07:01'),
-('ji', 'diijd', 2, '55.00', 'red', 'w', 'Shoes', 'Active', 'picture/17 kills.png', '2024-03-13 08:01:13');
+('10002', 'khngb', 2, '98.00', '', 'jhv', 'Shoes', 'Active', 'picture/WhatsApp Image 2024-10-09 at 11.27.10 PM.jpeg', '2025-09-26 18:01:30'),
+('10004', '567890', 3, '678.00', '', 'hn', 'Shoes', 'Active', 'picture/WhatsApp Image 2024-10-09 at 11.27.10 PM.jpeg', '2025-09-26 18:06:50');
 
 -- --------------------------------------------------------
 
@@ -392,13 +421,11 @@ INSERT INTO `inventory` (`id`, `name`, `quantity`, `unitprice`, `variant`, `desc
 -- Table structure for table `location`
 --
 
-DROP TABLE IF EXISTS `location`;
-CREATE TABLE IF NOT EXISTS `location` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `location` (
+  `id` int(11) NOT NULL,
   `name` varchar(250) NOT NULL,
-  `address` varchar(250) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+  `address` varchar(250) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `location`
@@ -415,14 +442,12 @@ INSERT INTO `location` (`id`, `name`, `address`) VALUES
 -- Table structure for table `loginouthistory`
 --
 
-DROP TABLE IF EXISTS `loginouthistory`;
-CREATE TABLE IF NOT EXISTS `loginouthistory` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `loginouthistory` (
+  `id` int(11) NOT NULL,
   `username` varchar(11) NOT NULL,
-  `login` timestamp NOT NULL,
-  `logout` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=148 DEFAULT CHARSET=latin1;
+  `login` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `logout` timestamp NULL DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `loginouthistory`
@@ -459,7 +484,11 @@ INSERT INTO `loginouthistory` (`id`, `username`, `login`, `logout`) VALUES
 (120, 'admin2', '2023-11-16 00:38:25', '2023-11-16 01:17:03'),
 (119, 'admin2', '2023-11-16 00:37:39', '2023-11-16 00:37:56'),
 (118, 'admin2', '2023-11-16 00:33:38', '2023-11-16 00:37:36'),
-(117, 'admin2', '2023-11-15 15:22:30', '2023-11-15 19:56:54');
+(117, 'admin2', '2023-11-15 15:22:30', '2023-11-15 19:56:54'),
+(148, 'harzixuan', '2025-09-22 02:54:32', NULL),
+(149, 'Rihana', '2025-09-22 03:00:10', '2025-09-22 03:00:10'),
+(150, 'Rihana', '2025-09-26 18:32:27', '2025-09-26 18:32:27'),
+(151, 'Rihana', '2025-09-28 23:34:13', NULL);
 
 -- --------------------------------------------------------
 
@@ -467,9 +496,8 @@ INSERT INTO `loginouthistory` (`id`, `username`, `login`, `logout`) VALUES
 -- Table structure for table `report`
 --
 
-DROP TABLE IF EXISTS `report`;
-CREATE TABLE IF NOT EXISTS `report` (
-  `mainid` int(250) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `report` (
+  `mainid` int(250) NOT NULL,
   `id` varchar(10) NOT NULL,
   `name` varchar(255) NOT NULL,
   `quantity` int(11) NOT NULL,
@@ -480,9 +508,8 @@ CREATE TABLE IF NOT EXISTS `report` (
   `image` varchar(250) NOT NULL,
   `variant` varchar(255) NOT NULL,
   `Action` varchar(250) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`mainid`)
-) ENGINE=MyISAM AUTO_INCREMENT=269 DEFAULT CHARSET=latin1;
+  `date` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `report`
@@ -543,7 +570,41 @@ INSERT INTO `report` (`mainid`, `id`, `name`, `quantity`, `unitprice`, `descript
 (219, 'TOY01', 'Gru Toy', 242, '10.00', '', 'Toys', 'Active', 'picture/gru.jpg', '', 'Product edited', '2023-11-15 15:36:26'),
 (220, 'C02', 'Metal Spoon', 30, '3.00', '', 'Toys', 'Active', 'picture/spoonx.jpg', '', 'Added to inventory', '2023-11-15 15:37:49'),
 (221, 'MP01', 'ArtLine MarkerPen', 56, '2.00', '', 'Stationery', 'Active', 'picture/Artline 100 Permanent Marker Pen - Red.jpeg', 'Red', 'Product edited', '2023-11-15 15:38:13'),
-(222, 'MP02', 'ArtLine MarkerPen', 56, '2.00', '', 'Stationery', 'Active', 'picture/artline-100-marker-pen-blue.jpg', 'Blue', 'Product edited', '2023-11-15 15:38:18');
+(222, 'MP02', 'ArtLine MarkerPen', 56, '2.00', '', 'Stationery', 'Active', 'picture/artline-100-marker-pen-blue.jpg', 'Blue', 'Product edited', '2023-11-15 15:38:18'),
+(269, '10002', 'fgyui', 6789, '66.00', '', 'Shoes', 'Active', 'picture/WhatsApp Image 2024-10-09 at 11.27.10 PM.jpeg', '', 'Added to inventory', '2025-09-22 06:51:41'),
+(270, '10004', 'ertyu', 67, '67.00', '', 'Shoes', 'Active', 'picture/WhatsApp Image 2024-10-09 at 11.27.10 PM.jpeg', '', 'Added to inventory', '2025-09-22 06:52:01'),
+(271, '10004', 'rtyjk', 98, '8.00', '', 'Shoes', 'Active', 'picture/WhatsApp Image 2024-10-09 at 11.27.10 PM.jpeg', '', 'Added to inventory', '2025-09-22 07:11:15'),
+(272, '10004', '567890', 2, '678.00', '', 'Shoes', 'Active', 'picture/WhatsApp Image 2024-10-09 at 11.27.10 PM.jpeg', '', 'Added to inventory', '2025-09-22 07:21:44'),
+(273, '10004', '567890', 2, '678.00', '', 'Shoes', 'Active', 'picture/WhatsApp Image 2024-10-09 at 11.27.10 PM.jpeg', '', 'Quantity changed from 0 to 2', '2025-09-22 07:23:04'),
+(274, '10004', '567890', 4, '678.00', '', 'Shoes', 'Active', 'picture/WhatsApp Image 2024-10-09 at 11.27.10 PM.jpeg', '', 'Quantity changed from 0 to 4', '2025-09-22 07:24:52'),
+(275, '10004', '567890', 4, '678.00', '', 'Shoes', 'Active', 'picture/WhatsApp Image 2024-10-09 at 11.27.10 PM.jpeg', '', 'Quantity changed from 1 to 4', '2025-09-22 07:34:09'),
+(276, '10002', 'khngb', 4, '98.00', '', 'Shoes', 'Active', 'picture/WhatsApp Image 2024-10-09 at 11.27.10 PM.jpeg', '', 'Added to inventory', '2025-09-22 07:34:38'),
+(277, '10002', 'khngb', 6, '98.00', '', 'Shoes', 'Active', 'picture/WhatsApp Image 2024-10-09 at 11.27.10 PM.jpeg', '', 'Quantity changed from 2 to 6', '2025-09-26 17:52:00'),
+(278, '10002', 'khngb', 6, '98.00', '', 'Shoes', 'Active', 'picture/WhatsApp Image 2024-10-09 at 11.27.10 PM.jpeg', '', 'Product edited', '2025-09-26 17:52:08'),
+(279, '10002', 'khngb', 6, '98.00', '', 'Shoes', 'Active', 'picture/WhatsApp Image 2024-10-09 at 11.27.10 PM.jpeg', '', 'Quantity changed from 2 to 6', '2025-09-26 17:59:57'),
+(280, '10004', '567890', 6, '678.00', '', 'Shoes', 'Active', 'picture/WhatsApp Image 2024-10-09 at 11.27.10 PM.jpeg', '', 'Quantity changed from 2 to 6', '2025-09-26 18:06:23');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `sales_report`
+--
+
+CREATE TABLE `sales_report` (
+  `id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `product_id` varchar(50) NOT NULL,
+  `productname` varchar(255) NOT NULL,
+  `unitprice` decimal(10,2) NOT NULL,
+  `quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `sales_report`
+--
+
+INSERT INTO `sales_report` (`id`, `date`, `product_id`, `productname`, `unitprice`, `quantity`) VALUES
+(1, '2025-09-26', '10002', 'khngb', '98.00', 4);
 
 -- --------------------------------------------------------
 
@@ -551,14 +612,12 @@ INSERT INTO `report` (`mainid`, `id`, `name`, `quantity`, `unitprice`, `descript
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `passw` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+  `name` varchar(255) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `users`
@@ -566,7 +625,124 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `username`, `passw`, `name`) VALUES
 (26, 'admin1', '$2y$10$QywZo8z/lgMkJDHpVx1nXu40/bAQv4BXB31nm.bvMMtlkPcl9Zafy', 'admin1'),
-(24, 'harzixuan', '$2y$10$RrOZNJeKFrNN7a80pwc7Jurxd/tT7DgXZXpnz59NcZKx9H9mUbMuK', 'harzixuan');
+(24, 'harzixuan', '$2y$10$RrOZNJeKFrNN7a80pwc7Jurxd/tT7DgXZXpnz59NcZKx9H9mUbMuK', 'harzixuan'),
+(27, 'Rihana', '$2y$10$YWfaMapGT/M.i/Gesr4a0edxhCUx9..0De4ai1o4UEqITCLhQ1sLu', 'Rihana');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `audittrails`
+--
+ALTER TABLE `audittrails`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`categoryid`);
+
+--
+-- Indexes for table `companyprofile`
+--
+ALTER TABLE `companyprofile`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `deliverorder`
+--
+ALTER TABLE `deliverorder`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `inventory`
+--
+ALTER TABLE `inventory`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `location`
+--
+ALTER TABLE `location`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `loginouthistory`
+--
+ALTER TABLE `loginouthistory`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `report`
+--
+ALTER TABLE `report`
+  ADD PRIMARY KEY (`mainid`);
+
+--
+-- Indexes for table `sales_report`
+--
+ALTER TABLE `sales_report`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `audittrails`
+--
+ALTER TABLE `audittrails`
+  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=762;
+
+--
+-- AUTO_INCREMENT for table `companyprofile`
+--
+ALTER TABLE `companyprofile`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `deliverorder`
+--
+ALTER TABLE `deliverorder`
+  MODIFY `id` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+
+--
+-- AUTO_INCREMENT for table `location`
+--
+ALTER TABLE `location`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `loginouthistory`
+--
+ALTER TABLE `loginouthistory`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=152;
+
+--
+-- AUTO_INCREMENT for table `report`
+--
+ALTER TABLE `report`
+  MODIFY `mainid` int(250) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=281;
+
+--
+-- AUTO_INCREMENT for table `sales_report`
+--
+ALTER TABLE `sales_report`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
