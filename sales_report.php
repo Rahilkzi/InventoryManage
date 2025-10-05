@@ -1,5 +1,6 @@
 <?php
 include 'config.php';
+require_once "fpdf/fpdf186/fpdf.php";
 
 // Handle delete request
 if (isset($_GET['delete'])) {
@@ -13,8 +14,25 @@ if (isset($_GET['delete'])) {
     exit;
 }
 
+
+
+if (isset($_POST['search'])) {
+    $date1 = $_POST['date1'] . " 00:00:00";
+    $date2 = $_POST['date2'] . " 23:59:59";
+
+
+    $query = "SELECT * FROM sales_report WHERE date BETWEEN ? AND ? ORDER BY date DESC";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "ss", $date1, $date2);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+} else {
+    // Fetch sales data
+    $result = mysqli_query($conn, "SELECT * FROM sales_report ORDER BY date DESC");
+}
+
 // Fetch sales data
-$result = mysqli_query($conn, "SELECT * FROM sales_report ORDER BY date DESC");
+// $result = mysqli_query($conn, "SELECT * FROM sales_report ORDER BY date DESC");
 
 // Variables for totals
 $totalQuantity = 0;
@@ -43,6 +61,15 @@ $companyName = $companyProfile['name'];
     <link rel="stylesheet" href="testin3.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $('table').DataTable(); // Click-to-sort enabled by default
+});
+</script>
     <title>Sales Report</title>
     <style>
         body {
@@ -178,10 +205,40 @@ $companyName = $companyProfile['name'];
                 </li>
         </div>
     </nav>
-     <section class="dashboard">
+    <section class="dashboard">
+<div class="container mb-4">
+    <form method="POST" id="orderForm" action="">
+        <div class="row g-3 align-items-end">
+            <div class="col-md-4">
+                <label for="date1" class="form-label">Date From:</label>
+                <input type="date" class="form-control" name="date1"
+                    value="<?php echo isset($_POST['date1']) ? $_POST['date1'] : '' ?>" />
+            </div>
+            <div class="col-md-4">
+                <label for="date2" class="form-label">To:</label>
+                <input type="date" class="form-control" name="date2"
+                    value="<?php echo isset($_POST['date2']) ? $_POST['date2'] : '' ?>" />
+            </div>
+            <div class="col-md-2 d-flex gap-2">
+                <button type="submit" class="btn btn-primary" name="search">
+                    <ion-icon name="search-outline"></ion-icon> Search
+                </button>
+                 </form>
+                <form method="POST" action="sales_report_pdf.php" target="_blank">
+                    <input type="hidden" name="date1" value="<?= $_POST['date1'] ?? '' ?>">
+                    <input type="hidden" name="date2" value="<?= $_POST['date2'] ?? '' ?>">
+                    <button type="submit" class="btn btn-success">Download Report</button>
+                </form>
+            </div>
+        </div>
+    <!-- </form> -->
+</div>
+<hr>
 <h2>Sales Report</h2>
 
-<table>
+<table class="table table-bordered table-hover">
+    <thead class="table-light">
+
     <tr>
         <th>ID</th>
         <th>Date</th>
@@ -190,8 +247,10 @@ $companyName = $companyProfile['name'];
         <th>Unit Price</th>
         <th>Quantity</th>
         <th>Amount</th>
-        <th>Actions</th>
+        <!-- <th>Actions</th> -->
     </tr>
+</thead>
+<tbody>
      <?php while ($row = mysqli_fetch_assoc($result)) { 
         $amount = $row['unitprice'] * $row['quantity'];
         $totalQuantity += $row['quantity'];
@@ -207,21 +266,32 @@ $companyName = $companyProfile['name'];
             <td><?= number_format($row['unitprice'], 2) ?></td>
             <td><?= htmlspecialchars($row['quantity']) ?></td>
             <td><?= number_format($amount, 2) ?></td>
-            <td>
+            <!-- <td>
                 <a href="edit_sales.php?id=<?= $row['id'] ?>" class="edit">Edit</a>
                 <a href="copy_sales.php?id=<?= $row['id'] ?>" class="copy">Copy</a>
+                
                 <a href="sales_report.php?delete=<?= $row['id'] ?>" class="delete" onclick="return confirm('Delete this record?')">Delete</a>
-            </td>
+            </td> -->
         </tr>
     <?php } ?>
 
      <!-- Grand Total Row -->
-    <tr class="grand-total">
+    <!-- <tr class="table-secondary fw-bold grand-total">
         <td colspan="5">Grand Total</td>
         <td><?= $totalQuantity ?></td>
         <td><?= number_format($totalAmount, 2) ?></td>
         <td>—</td>
+    </tr> -->
+    </tbody>
+     <tfoot>
+    <tr class="table-secondary fw-bold grand-total">
+      <td colspan="5">Grand Total</td>
+      <td><?= $totalQuantity ?></td>
+      <td><?= number_format($totalAmount, 2) ?></td>
+      <!-- <td>—</td> -->
     </tr>
+  </tfoot>
+
 </table>
 
 </section>

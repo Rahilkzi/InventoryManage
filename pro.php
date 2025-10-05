@@ -50,6 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['barcodes'])) {
 
 
             echo "<li>✅ Product ID <strong>" . htmlspecialchars($code) . "</strong> scanned $count times → New quantity: $newQuantity</li>";
+            // Redirect after processing
+            header("Location: http://localhost:8080/sms/sales_report.php");
+            exit;
+
+    
         } else {
             echo "<li>❌ Product ID <strong>" . htmlspecialchars($code) . "</strong> not found in inventory.</li>";
         }
