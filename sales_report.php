@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'config.php';
 require_once "fpdf/fpdf186/fpdf.php";
 
@@ -197,7 +198,8 @@ $(document).ready(function() {
         </a>
     </li>          
 
-<?php endif; ?>          
+<?php endif; ?>
+          
             </ul>
             <ul class="bottom-link">
                 <li>
@@ -264,12 +266,13 @@ $(document).ready(function() {
 
         <tr>
             <td><?= htmlspecialchars($row['id']) ?></td>
-            <td><?= htmlspecialchars($row['date']) ?></td>
+            <td><?= date("d-m-Y, h:i A", strtotime($row['date'])) ?></td>
+
             <td><?= htmlspecialchars($row['product_id']) ?></td>
             <td><?= htmlspecialchars($row['productname']) ?></td>
-            <td><?= number_format($row['unitprice'], 2) ?></td>
+            <td>₹<?= number_format($row['unitprice'], 2) ?></td>
             <td><?= htmlspecialchars($row['quantity']) ?></td>
-            <td><?= number_format($amount, 2) ?></td>
+            <td>₹<?= number_format($amount, 2) ?></td>
             <!-- <td>
                 <a href="edit_sales.php?id=<?= $row['id'] ?>" class="edit">Edit</a>
                 <a href="copy_sales.php?id=<?= $row['id'] ?>" class="copy">Copy</a>
@@ -291,7 +294,7 @@ $(document).ready(function() {
     <tr class="table-secondary fw-bold grand-total">
       <td colspan="5">Grand Total</td>
       <td><?= $totalQuantity ?></td>
-      <td><?= number_format($totalAmount, 2) ?></td>
+      <td>₹<?= number_format($totalAmount, 2) ?></td>
       <!-- <td>—</td> -->
     </tr>
   </tfoot>

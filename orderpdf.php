@@ -16,8 +16,9 @@ $companyProfileImagePath = $companyProfile['profilepicture'];
 $companyName = $companyProfile['name'];
 
 $selectedLocation = mysqli_real_escape_string($conn, $_POST['locationFilter']);
- $date1 = date("Y-m-d", strtotime($_POST['date1']));
-    $date2 = date("Y-m-d", strtotime($_POST['date2']));
+$date1 = isset($_POST['date1']) ? date("Y-m-d", strtotime($_POST['date1'])) : null;
+$date2 = isset($_POST['date2']) ? date("Y-m-d", strtotime($_POST['date2'])) : null;
+
 
 $pdf= new FPDF('P','mm',"A4");
 $pdf->AddPage();
@@ -97,11 +98,12 @@ $pdf->Cell(59, 5, '', 0, 1);
 $pdf->SetFont('Arial','B', 11);
 $pdf->Cell(59 ,5,'',0,1);
 
-$pdf->Cell(30 ,6,'Tracking ID' ,1,0,'C');
+$pdf->Cell(10 ,6,'ID' ,1,0,'C');
 $pdf->Cell(25 ,6,'Product ID' ,1,0,'C');
 $pdf->Cell(35 ,6,'Product Name' ,1,0,'C');
 $pdf->Cell(20 ,6,'Quantity' ,1,0,'C');
 $pdf->Cell(20 ,6,'Unit Price' ,1,0,'C');
+$pdf->Cell(25 ,6,'Total Price' ,1,0,'C');
 $pdf->Cell(30 ,6,'Location' ,1,0,'C');
 $pdf->Cell(30 ,6,'Transfered Date' ,1,1,'C');
 
@@ -119,11 +121,15 @@ if (!empty($_POST['date1']) && !empty($_POST['date2'])) {
     }
 
     while ($reportRow = mysqli_fetch_assoc($reportQuery)) {
-        $pdf->Cell(30, 6, $reportRow['id'], 1, 0, 'C');
+        $pdf->Cell(10, 6, $reportRow['id'], 1, 0, 'C');
         $pdf->Cell(25, 6, $reportRow['productid'], 1, 0, 'C');
         $pdf->Cell(35, 6, $reportRow['name'], 1, 0, 'C');
         $pdf->Cell(20, 6, $reportRow['quantity'], 1, 0, 'C');
         $pdf->Cell(20, 6, $reportRow['unitprice'], 1, 0, 'C');
+
+        $totalPrice = $reportRow['quantity'] * $reportRow['unitprice']; // ✅ Calculate
+        $pdf->Cell(25, 6, number_format($totalPrice, 2), 1, 0, 'C'); // ✅ Show
+
         $pdf->Cell(30, 6, $reportRow['location'], 1, 0, 'C');
         $pdf->Cell(30, 6, date('Y-m-d', strtotime($reportRow['addeddate'])), 1, 0, 'C');
         // ... other cells ...
@@ -139,11 +145,15 @@ if (!empty($_POST['date1']) && !empty($_POST['date2'])) {
     }
     
     while ($reportRow = mysqli_fetch_assoc($reportQuery)) {
-        $pdf->Cell(30, 6, $reportRow['id'], 1, 0, 'C');
+        $pdf->Cell(10, 6, $reportRow['id'], 1, 0, 'C');
         $pdf->Cell(25, 6, $reportRow['productid'], 1, 0, 'C');
         $pdf->Cell(35, 6, $reportRow['name'], 1, 0, 'C');
         $pdf->Cell(20, 6, $reportRow['quantity'], 1, 0, 'C');
         $pdf->Cell(20, 6, $reportRow['unitprice'], 1, 0, 'C');
+
+        $totalPrice = $reportRow['quantity'] * $reportRow['unitprice']; // ✅ Calculate
+        $pdf->Cell(25, 6, number_format($totalPrice, 2), 1, 0, 'C'); // ✅ Show
+
         $pdf->Cell(30, 6, $reportRow['location'], 1, 0, 'C');
         $pdf->Cell(30, 6, date('Y-m-d', strtotime($reportRow['addeddate'])), 1, 0, 'C');
         // ... other cells ...
@@ -167,7 +177,9 @@ $pdf->Cell(80, 5, '', 0, 0); // Add some space between the two sections
 $pdf->Cell(50, 5, 'Received by', 0, 1);
 
 $pdf->Output();
-header("Location: Order.php"); // Replace Order.php with the desired page
+// $pdf->Output('D', 'Product_Transfer_Report_' . date('Ymd_His') . '.pdf');
+
+// header("Location: Order.php"); // Replace Order.php with the desired page
 exit();
 
 // Add JavaScript to prevent form resubmission

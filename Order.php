@@ -246,6 +246,7 @@ while ($locationFetch = mysqli_fetch_assoc($locationQuery)) {
             <th>Name</th>
             <th>Quantity</th>
             <th>Unit Price</th>
+            <th>Total Price</th>
             <th>Location</th>
             <th>Transfered Date</th>
         </tr>
@@ -289,7 +290,7 @@ while ($locationFetch = mysqli_fetch_assoc($locationQuery)) {
         var tableRows = document.querySelectorAll('#inventory tbody tr');
 
         tableRows.forEach(function (row) {
-            var locationCell = row.querySelector('td:nth-child(6)'); // Assuming location is in the 6th column
+            var locationCell = row.querySelector('td:nth-child(7)'); // Assuming location is in the 6th column
 
             if (!selectedLocation || locationCell.textContent.toLowerCase() === selectedLocation) {
                 row.style.display = '';
