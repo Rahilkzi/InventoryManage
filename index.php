@@ -3,6 +3,11 @@ session_start();
 require_once "config.php";
 
 
+// Redirect if already logged in
+if (isset($_SESSION['username'])) {
+    header('Location: dashboard.php');
+    exit();
+}
 
 $Incorrect = isset($_SESSION['Incorrect']) ? $_SESSION['Incorrect'] : false;
 $IncorrectMessage = isset($_SESSION['IncorrectMessage']) ? $_SESSION['IncorrectMessage'] : "";

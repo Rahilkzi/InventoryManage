@@ -1,7 +1,11 @@
 <?php
-session_start();
-isset($_SESSION['login']) && $_SESSION['login']===true? '': header("Location:Login.php");
+// session_start();
+// isset($_SESSION['login']) && $_SESSION['login']===true? '': header("Location:Login.php");
 require_once "config.php";
+require 'access.php';
+requireRole('admin');
+requireLogin();
+
 $companyId = 1; 
 $query = "SELECT * FROM companyprofile WHERE id = ?";
 $stmt = mysqli_prepare($conn, $query);
@@ -12,6 +16,7 @@ $companyProfile = mysqli_fetch_assoc($result);
 $companyProfileImagePath = $companyProfile['profilepicture'];
 $companyName = $companyProfile['name'];
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

@@ -130,6 +130,8 @@ while ($locationFetch = mysqli_fetch_assoc($locationQuery)) {
         </a>
     </li> 
 
+    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+
     <li class="navList">
         <a href="Reports.php">
             <ion-icon name="reader"></ion-icon> <!-- Change to the desired icon name, e.g., "person-outline" for account -->
@@ -150,6 +152,8 @@ while ($locationFetch = mysqli_fetch_assoc($locationQuery)) {
             <span class="links">Settings</span>
         </a>
     </li>          
+
+<?php endif; ?>          
             </ul>
             <ul class="bottom-link">
                 <li>

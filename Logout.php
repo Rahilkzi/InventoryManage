@@ -19,10 +19,10 @@ if (isset($_SESSION['login']) && $_SESSION['login'] === true) {
             echo '<script>
                     var logoutConfirmed = confirm("Are you sure you want to logout?");
                     if (logoutConfirmed) {
-                        window.location.href = "Login.php";
+                        window.location.href = "index.php";
                     } else {
                         // Redirect to some other page or stay on the current page
-                        // window.location.href = "Dashboard.php";
+                        window.location.href = "Dashboard.php";
                     }
                 </script>';
         } else {

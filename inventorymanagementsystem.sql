@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 05, 2025 at 07:15 PM
+-- Generation Time: Oct 08, 2025 at 10:21 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -39,6 +39,37 @@ CREATE TABLE `audittrails` (
 --
 
 INSERT INTO `audittrails` (`id`, `datetime`, `username`, `action`) VALUES
+(805, '2025-10-08 08:20:38', 'Rihana', 'Logout'),
+(804, '2025-10-08 08:19:29', 'Rihana', 'Login'),
+(803, '2025-10-08 08:19:25', 'harzixuan', 'Logout'),
+(802, '2025-10-08 08:19:01', 'harzixuan', 'Login'),
+(801, '2025-10-08 08:18:59', 'harzixuan', 'Logout'),
+(800, '2025-10-08 08:16:52', 'harzixuan', 'Login'),
+(799, '2025-10-08 08:16:43', 'harzixuan', 'Logout'),
+(798, '2025-10-08 08:16:42', 'harzixuan', 'Login'),
+(797, '2025-10-08 08:16:27', 'harzixuan', 'Logout'),
+(796, '2025-10-08 08:16:26', 'harzixuan', 'Login'),
+(795, '2025-10-08 08:16:14', 'harzixuan', 'Logout'),
+(794, '2025-10-08 08:16:13', 'harzixuan', 'Login'),
+(793, '2025-10-08 08:15:24', 'harzixuan', 'Logout'),
+(792, '2025-10-08 08:15:23', 'harzixuan', 'Login'),
+(791, '2025-10-08 08:14:42', 'harzixuan', 'Logout'),
+(790, '2025-10-08 08:14:41', 'harzixuan', 'Login'),
+(789, '2025-10-08 08:13:28', 'harzixuan', 'Logout'),
+(788, '2025-10-08 08:13:04', 'harzixuan', 'Login'),
+(787, '2025-10-08 08:12:56', 'harzixuan', 'Logout'),
+(786, '2025-10-08 07:59:22', 'harzixuan', 'Login'),
+(785, '2025-10-08 07:59:01', 'harzixuan', 'Logout'),
+(784, '2025-10-08 07:56:01', 'harzixuan', 'Login'),
+(783, '2025-10-08 07:55:24', 'harzixuan', 'Login'),
+(782, '2025-10-08 07:53:37', 'harzixuan', 'Login'),
+(781, '2025-10-08 07:53:12', 'harzixuan', 'Login'),
+(780, '2025-10-08 07:53:03', 'harzixuan', 'Login'),
+(779, '2025-10-08 07:51:21', 'harzixuan', 'Login'),
+(778, '2025-10-08 07:50:57', 'harzixuan', 'Login'),
+(777, '2025-10-08 07:50:41', 'harzixuan', 'Login'),
+(776, '2025-10-08 07:48:30', 'harzixuan', 'Login'),
+(775, '2025-10-08 07:27:00', 'harzixuan', 'Login'),
 (774, '2025-10-05 14:13:10', 'harzixuan', 'Login'),
 (773, '2025-10-05 14:01:51', 'harzixuan', 'Login'),
 (772, '2025-10-05 14:00:40', 'harzixuan', 'Login'),
@@ -212,7 +243,17 @@ CREATE TABLE `loginouthistory` (
 --
 
 INSERT INTO `loginouthistory` (`id`, `username`, `login`, `logout`) VALUES
-(154, 'harzixuan', '2025-10-05 14:13:10', NULL),
+(164, 'Rihana', '2025-10-08 08:20:38', '2025-10-08 08:20:38'),
+(163, 'harzixuan', '2025-10-08 08:19:25', '2025-10-08 08:19:25'),
+(162, 'harzixuan', '2025-10-08 08:18:59', '2025-10-08 08:18:59'),
+(161, 'harzixuan', '2025-10-08 08:16:43', '2025-10-08 08:16:43'),
+(160, 'harzixuan', '2025-10-08 08:16:27', '2025-10-08 08:16:27'),
+(159, 'harzixuan', '2025-10-08 08:16:14', '2025-10-08 08:16:14'),
+(158, 'harzixuan', '2025-10-08 08:15:24', '2025-10-08 08:15:24'),
+(157, 'harzixuan', '2025-10-08 08:14:42', '2025-10-08 08:14:42'),
+(156, 'harzixuan', '2025-10-08 08:13:28', '2025-10-08 08:13:28'),
+(155, 'harzixuan', '2025-10-08 08:12:56', '2025-10-08 08:12:56'),
+(154, 'harzixuan', '2025-10-08 07:59:01', '2025-10-08 07:59:01'),
 (153, 'harzixuan', '2025-10-04 07:44:46', '2025-10-04 07:44:46'),
 (152, 'harzixuan', '2025-10-04 07:07:38', '2025-10-04 07:07:38');
 
@@ -324,17 +365,18 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `username` varchar(255) NOT NULL,
   `passw` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL
+  `name` varchar(255) NOT NULL,
+  `role` varchar(20) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `passw`, `name`) VALUES
-(26, 'admin1', '$2y$10$QywZo8z/lgMkJDHpVx1nXu40/bAQv4BXB31nm.bvMMtlkPcl9Zafy', 'admin1'),
-(24, 'harzixuan', '$2y$10$RrOZNJeKFrNN7a80pwc7Jurxd/tT7DgXZXpnz59NcZKx9H9mUbMuK', 'harzixuan'),
-(27, 'Rihana', '$2y$10$YWfaMapGT/M.i/Gesr4a0edxhCUx9..0De4ai1o4UEqITCLhQ1sLu', 'Rihana');
+INSERT INTO `users` (`id`, `username`, `passw`, `name`, `role`) VALUES
+(26, 'admin1', '$2y$10$QywZo8z/lgMkJDHpVx1nXu40/bAQv4BXB31nm.bvMMtlkPcl9Zafy', 'admin1', 'admin'),
+(24, 'harzixuan', '$2y$10$RrOZNJeKFrNN7a80pwc7Jurxd/tT7DgXZXpnz59NcZKx9H9mUbMuK', 'harzixuan', 'admin'),
+(28, 'Rihana', '$2y$10$wBa1gH1qSE7miV5.lPIGI.6JlSzp80662NAbLtzUDw8OCNB5zvh4e', 'Rihana', '');
 
 --
 -- Indexes for dumped tables
@@ -408,7 +450,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `audittrails`
 --
 ALTER TABLE `audittrails`
-  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=775;
+  MODIFY `id` int(200) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=806;
 
 --
 -- AUTO_INCREMENT for table `companyprofile`
@@ -432,7 +474,7 @@ ALTER TABLE `location`
 -- AUTO_INCREMENT for table `loginouthistory`
 --
 ALTER TABLE `loginouthistory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=155;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
 
 --
 -- AUTO_INCREMENT for table `report`
@@ -450,7 +492,7 @@ ALTER TABLE `sales_report`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

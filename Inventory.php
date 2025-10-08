@@ -182,6 +182,8 @@ $companyName = $companyProfile['name'];
     </li> 
 
 
+    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+
     <li class="navList">
         <a href="Reports.php">
             <ion-icon name="reader"></ion-icon> <!-- Change to the desired icon name, e.g., "person-outline" for account -->
@@ -202,6 +204,8 @@ $companyName = $companyProfile['name'];
             <span class="links">Settings</span>
         </a>
     </li>          
+
+<?php endif; ?>          
             </ul>
             <ul class="bottom-link">
                 <li>
@@ -318,6 +322,7 @@ $companyName = $companyProfile['name'];
                                         <td><?php echo $row['category'];?></td>
                                         <td><?php echo $row['status'];?></td>
                                         <td>
+                                            
                                             <a href="edit.php?editid=<?php echo htmlentities($row['id']);?>" class="btn btn-sm" style="background-color:#1988F5; margin-right:5px;"> <ion-icon name="create-outline"></ion-icon>
 </a>
                                             <a href="Inventory.php?delid=<?php echo htmlentities($row['id']);?>" onClick ="return confirm('Are you sure you want to delete this product ?');" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span><ion-icon name="trash-outline"></ion-icon></a>

@@ -1,8 +1,11 @@
 <?php
-session_start();
+// session_start();
 require_once "config.php";
 
-isset($_SESSION['login']) && $_SESSION['login']===true? '': header("Location:Login.php");
+// isset($_SESSION['login']) && $_SESSION['login']===true? '': header("Location:Login.php");
+require 'access.php';
+// requireRole('staff');
+requireLogin();
 
 
 
@@ -108,6 +111,8 @@ $companyName = $companyProfile['name'];
 
 
 
+    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+
     <li class="navList">
         <a href="Reports.php">
             <ion-icon name="reader"></ion-icon> <!-- Change to the desired icon name, e.g., "person-outline" for account -->
@@ -128,6 +133,9 @@ $companyName = $companyProfile['name'];
             <span class="links">Settings</span>
         </a>
     </li>          
+    
+
+<?php endif; ?>
             </ul>
             <ul class="bottom-link">
                 <li>
@@ -149,6 +157,7 @@ $companyName = $companyProfile['name'];
         <div class="row">
                 <div class="col-lg-12 col-offset-2">
             <h2><ion-icon name="stats-chart"></ion-icon>   Dashboard</h2>
+            <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
      <div style="display:flex;">
      <div class="col-md-3">
      <a href="viewaccount.php" class="boxdash" style="background: linear-gradient(90deg, #00d2ff 0%, #3a47d5 100%);">  
@@ -157,6 +166,7 @@ $companyName = $companyProfile['name'];
         <h2 class="margin-top"><?php echo $c_users; ?></h2>
         <p class="text-muted">Users</p>
     </div>
+    <?php endif; ?>
 </a>
 </div>
 
